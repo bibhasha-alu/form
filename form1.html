@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            padding: 5%;
+        }
+        .box {
+            border: 0.1em solid black;
+            padding: 5%;
+            width: 30%; /* Changed to 30% to make it smaller */
+            margin: 0 auto;
+        }
+        .row {
+            padding-bottom: 3%;
+        }
+        input[type="text"], 
+        input[type="password"], 
+        input[type="number"] {
+            width: 95%;
+            padding: 2%;
+            margin-top: 1%;
+            border: 0.1em solid black;
+        }
+        .msg {
+            color: red;
+            font-size: 80%;
+        }
+        button {
+            background-color: black;
+            color: white;
+            padding: 3%;
+            width: 100%;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <center><h2><b>Register</b></h2></center>
+    <form onsubmit="return check(event)">
+        
+        <div class="row">
+            <b>Name</b><br>
+            <input type="text" id="i1">
+            <div id="e1" class="msg"></div>
+        </div>
+
+        <div class="row">
+            <b>Email</b><br>
+            <input type="text" id="i2">
+            <div id="e2" class="msg"></div>
+        </div>
+
+        <div class="row">
+            <b>Password</b><br>
+            <input type="password" id="i3">
+            <div id="e3" class="msg"></div>
+        </div>
+
+        <div class="row">
+            <b>Confirm Password</b><br>
+            <input type="password" id="i4">
+            <div id="e4" class="msg"></div>
+        </div>
+
+        <div class="row">
+            <b>Mobile Number</b><br>
+            <input type="number" id="i5">
+            <div id="e5" class="msg"></div>
+        </div>
+
+        <div class="row">
+            <b>Gender</b><br>
+            <input type="radio" name="g" id="g1"> <b>Male</b>
+            <input type="radio" name="g" id="g2"> <b>Female</b>
+            <div id="e6" class="msg"></div>
+        </div>
+
+        <div class="row">
+            <input type="checkbox" id="i7"> <b>Accept Terms & Conditions</b>
+            <div id="e7" class="msg"></div>
+        </div>
+
+        <button type="submit"><b>SUBMIT</b></button>
+    </form>
+</div>
+
+<script>
+    function check(e) {
+        e.preventDefault();
+        
+        document.getElementById("e1").innerHTML = "";
+        document.getElementById("e2").innerHTML = "";
+        document.getElementById("e3").innerHTML = "";
+        document.getElementById("e4").innerHTML = "";
+        document.getElementById("e5").innerHTML = "";
+        document.getElementById("e6").innerHTML = "";
+        document.getElementById("e7").innerHTML = "";
+
+        var a = document.getElementById("i1").value;
+        var b = document.getElementById("i2").value;
+        var c = document.getElementById("i3").value;
+        var d = document.getElementById("i4").value;
+        var f = document.getElementById("i5").value;
+        var m = document.getElementById("g1").checked;
+        var fem = document.getElementById("g2").checked;
+        var t = document.getElementById("i7").checked;
+        
+        var ok = true;
+
+        if(a == "") {
+            document.getElementById("e1").innerHTML = "Enter name";
+            ok = false;
+        }
+
+        var ptrn = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if(!ptrn.test(b)) {
+            document.getElementById("e2").innerHTML = "Unvalid email";
+            ok = false;
+        }
+
+        if(c.length < 8) {
+            document.getElementById("e3").innerHTML = "at least 8 characters";
+            ok = false;
+        }
+
+        if(c != d) {
+            document.getElementById("e4").innerHTML = "Mismatch";
+            ok = false;
+        }
+
+        var num = /^[0-9]{10}$/;
+        if(!num.test(f)) {
+            document.getElementById("e5").innerHTML = "Unvalid number";
+            ok = false;
+        }
+
+        if(m == false && fem == false) {
+            document.getElementById("e6").innerHTML = "Select one";
+            ok = false;
+        }
+
+        if(t == false) {
+            document.getElementById("e7").innerHTML = "Required";
+            ok = false;
+        }
+
+        if(ok == true) {
+            alert("Done");
+        }
+    }
+</script>
+
+</body>
+</html>
